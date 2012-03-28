@@ -10,13 +10,41 @@ import com.edropple.velvetrope.user.roles.Role
  * The base trait for ACL'd controllers. Mixing this into your controller
  * allows you to use AccessControlled in your action definitions.
  *
+ * Some examples of using AccessControlled follow:
+ *
+ * {{{
+ *
+ *  val readSomethingSecret = AccessControlled(SomeSecretPermission) {
+ *      (user, request) => {
+ *          Ok("here it is!")
+ *      }
+ *  }
+ *
+ *  val readSecretJson = AccessControlled(SomeSecretPermission, parse.json) {
+ *      request =>
+ *          (request.body \ "name").asOpt[String].map { name =>
+ *              Ok("Hello " + name)
+ *      }.getOrElse {
+ *          BadRequest("Missing parameter [name]")
+ *      }
+ *  }
+ *
+ * }}}
+ *
+ * AccessControlled also supports a Seq[Role] instead of a Role, but I'm
+ * conflicted about the utility of that feature and may remove it in the
+ * future.
+ *
+ * Also note that this will fail, and fail hard, if your global object doesn't
+ * implement VelvetropeGlobal. There are no checks on that cast.
+ *
  * @author eropple
  * @since 26 Mar 2012
  */
 
 trait AccessControlled {
     private lazy val global = Play.current.global.asInstanceOf[VelvetropeGlobal]
-    
+
     def AccessControlled(role: Role): AccessControlledBase[AnyContent] = AccessControlled(role, parse.anyContent)
     
     def AccessControlled(roles: Seq[Role]) : AccessControlledBase[AnyContent] = AccessControlledBase(roles, parse.anyContent)
