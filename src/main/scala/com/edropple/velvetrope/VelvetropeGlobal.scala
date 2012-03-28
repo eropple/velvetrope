@@ -1,7 +1,8 @@
-package com.edropple.velvetrope.user
+package com.edropple.velvetrope
 
 import play.api.mvc.{Result, Request}
-import roles.Role
+import user.RoleOwner
+import user.roles.Role
 
 
 /**
