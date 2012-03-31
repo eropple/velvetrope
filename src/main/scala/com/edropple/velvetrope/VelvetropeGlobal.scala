@@ -14,6 +14,14 @@ import user.roles.Role
  */
 
 trait VelvetropeGlobal {
+    /**
+     * Provides Velvetrope with the necessary logic to find the user from whatever
+     * stateful data is available. This method is always run inside of an Akka.future
+     * block.
+     *
+     * @param request The request object for this request
+     * @return Some[RoleOwner] if the request contains user authentication information, None otherwise
+     */
     def getRoleOwner[A](request: Request[A]): Option[RoleOwner]
 
     /**

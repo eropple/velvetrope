@@ -6,6 +6,7 @@ import play.api.Play
 import com.edropple.velvetrope.VelvetropeGlobal
 import com.edropple.velvetrope.user.RoleOwner
 import com.edropple.velvetrope.user.roles.Role
+import play.api.libs.concurrent.Akka
 
 /**
  * The base trait for ACL'd controllers. Mixing this into your controller
@@ -55,18 +56,27 @@ trait AccessControlled {
     case class AccessControlledBase[A](roles: Seq[Role], bp: BodyParser[A]) {
         def apply( f: (RoleOwner, Request[A]) => Result ): Action[A] = {
             Action(bp) { request => {
-                    val user: Option[RoleOwner] = global.getRoleOwner(request)
-                    if (user.isEmpty) {
-                        global.onAuthenticationFailure(request)
+                    val userPromise = Akka.future {
+                        global.getRoleOwner(request)
                     }
 
-                    val missingRoles = user.get.getAllRoles.intersect(roles)
-                
-                    if (missingRoles.length > 0) {
-                        global.onAuthorizationFailure(user, request, missingRoles)
-                    }
+                    Results.Async {
+                        userPromise.map( userOpt => {
+                            if (userOpt.isEmpty) {
+                                global.onAuthenticationFailure(request)
+                            }
+                            
+                            val user = userOpt.get
 
-                    f(user.get, request)
+                            val missingRoles = user.getAllRoles.intersect(roles)
+
+                            if (missingRoles.length > 0) {
+                                global.onAuthorizationFailure(userOpt, request, missingRoles)
+                            }
+
+                            f(user, request)
+                        })
+                    }
                 }
             }
         }
