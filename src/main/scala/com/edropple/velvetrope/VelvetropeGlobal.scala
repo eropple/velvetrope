@@ -16,5 +16,21 @@ import user.roles.Role
 trait VelvetropeGlobal {
     def getRoleOwner[A](request: Request[A]): Option[RoleOwner]
 
+    /**
+     * Called when a visitor attempts to access an access-controlled resource without
+     * having a role (via getRoleOwner).
+     * @param request The visitor's request
+     * @return a Result that should be presented to the visitor.
+     */
+    def onAuthenticationFailure[A](request: Request[A]): Result
+
+    /**
+     * Called when a user attempts to access an access-controlled resource without
+     * having the correct role.
+     * @param user the user accessing the resource
+     * @param request the request of the resource access
+     * @param missingRoles the missing roles that prevent the user from accessing the resource
+     * @return a Result that should be presented to the visitor.
+     */
     def onAuthorizationFailure[A](user: Option[RoleOwner], request: Request[A], missingRoles: Seq[Role]): Result
 }

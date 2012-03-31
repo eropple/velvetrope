@@ -57,7 +57,7 @@ trait AccessControlled {
             Action(bp) { request => {
                     val user: Option[RoleOwner] = global.getRoleOwner(request)
                     if (user.isEmpty) {
-                        global.onAuthorizationFailure(user, request, roles)
+                        global.onAuthenticationFailure(request)
                     }
 
                     val missingRoles = user.get.getAllRoles.intersect(roles)
