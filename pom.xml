@@ -6,7 +6,7 @@
 
     <groupId>com.edropple</groupId>
     <artifactId>velvetrope</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
 
     <build>
         <finalName>${project.name}-${project.version}</finalName>
@@ -19,6 +19,15 @@
             </extension>
         </extensions>
     </build>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.html</url>
+            <distribution>repo</distribution>
+            <comments>A very permissive open-source license. Do what you want, just make sure I'm credited and don't sue me.</comments>
+        </license>
+    </licenses>
 
     <repositories>
         <repository>
@@ -63,4 +72,24 @@
             <url>scp://edropple.com//srv/web/maven.edropple.com</url>
         </repository>
     </distributionManagement>
+
+
+
+    <developers>
+        <developer>
+            <id>eropple</id>
+            <name>Ed Ropple</name>
+            <email>ed+velvetrope@edropple.com</email>
+            <url>http://edropple.com</url>
+            <organization>TripAdvisor LLC</organization>
+            <organizationUrl>http://www.tripadvisor.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>-5</timezone>
+            <properties>
+                <twitter>edropple</twitter>
+            </properties>
+        </developer>
+    </developers>
 </project>
