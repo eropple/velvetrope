@@ -9,9 +9,6 @@ import roles.Role
  * allow for "User" and "MutableUser" being separate concepts (a pattern
  * I personally prefer).
  *
- * Please note that while token Java support is available, it may be removed
- * at any point if I don't think it's a big enough win.
- *
  * @author eropple
  * @since initial release
  */
