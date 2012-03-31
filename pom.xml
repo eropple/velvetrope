@@ -10,6 +10,14 @@
 
     <build>
         <finalName>${project.name}-${project.version}</finalName>
+
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>1.0</version>
+            </extension>
+        </extensions>
     </build>
 
     <repositories>
@@ -48,4 +56,11 @@
             <version>2.0</version>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>edropple-maven</id>
+            <url>scp://edropple.com//srv/web/maven.edropple.com</url>
+        </repository>
+    </distributionManagement>
 </project>
