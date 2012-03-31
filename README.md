@@ -6,8 +6,14 @@ as few assumptions about your code as possible. I wrote it recently to refresh
 my Scala (it's a little rough, I know) and to get started on building some
 useful components for my own Play! apps.
 
-You should be able to reference this git repo in your SBT file and have it
-automatically download and build the repo.
+If you want to keep fully updated with this project (I don't expect it to really
+churn too much, but it's possible), you should be able to reference this git repo
+in your SBT file and have it automatically download and build the repo. If you
+want something with a little more stability (my own projects will do this), you
+can use maven.edropple.com, my public maven repo, and track against 1.0-SNAPSHOT.
+So the dependency would look like this in your SBT file:
+
+"com.edropple" % "velvetrope" % "1.0-SNAPSHOT"
 
 Using VelvetRope
 ----------------
@@ -31,4 +37,5 @@ before using it (there's not a lot of it). The highlights, though:
 From there it should be pretty straightforward. If you've got any questions, I
 usually hang around #playframework as eropple and am on Twitter at @edropple.
 
-http://edropple.com
+http://edropple.com - site
+http://edcanhack.com - blog
