@@ -3,6 +3,7 @@ package com.edropple.velvetrope.actions
 import play.api.mvc._
 import play.api.mvc.BodyParsers._
 import play.api.Play
+import play.api.Play.current
 import com.edropple.velvetrope.VelvetropeGlobal
 import com.edropple.velvetrope.user.RoleOwner
 import com.edropple.velvetrope.user.roles.Role
