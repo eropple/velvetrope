@@ -69,7 +69,7 @@
     <distributionManagement>
         <repository>
             <id>edropple-maven</id>
-            <url>scp://edropple.com//srv/web/maven.edropple.com</url>
+            <url>scp://maven@edropple.com//srv/web/maven.edropple.com</url>
         </repository>
     </distributionManagement>
 
